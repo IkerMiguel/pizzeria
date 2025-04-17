@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class extra_ingredients extends Model
+class Client extends Model
 {
     use HasFactory;
-    protected $table = 'pizza_ingredient';
+    protected $table = 'clients';
     protected $primaryKey = 'id';
+    public $timestamps = false;
 }
