@@ -112,8 +112,19 @@ public function update(Request $request, $id)
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $order_extra_ingredient = Order_extra_ingredient::find($id);
+        $order_extra_ingredient->delete();
+
+    
+            $order_extra_ingredients = DB::table('order_extra_ingredient')
+            ->join('orders', 'order_extra_ingredient.order_id', '=', 'orders.id')
+            ->join('extra_ingredients', 'order_extra_ingredient.extra_ingredient_id', '=', 'extra_ingredients.id')
+            ->select('order_extra_ingredient.*', 'orders.id as order_code', 'extra_ingredients.name as ingredient_name')
+            ->get();
+
+        return view('order_extra_ingredient.index', ['order_extra_ingredients' => $order_extra_ingredients]);
     }
+    
 }
