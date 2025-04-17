@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\BrancheController;
+use App\Http\Controllers\Order_extra_ingredientController;
+use App\Http\Controllers\Pizza_raw_materialController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\Raw_materialController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,5 +30,15 @@ Route::middleware('auth')->group(function () {
     });
 
 */
+
+//order_extra_ingredient
+
+Route::get('/order_extra_ingredients', [Order_extra_ingredientController::class, 'index'])->name('order_extra_ingredients.index');
+Route::post('/order_extra_ingredients', [Order_extra_ingredientController::class, 'store'])->name('order_extra_ingredients.store');
+Route::get('/order_extra_ingredients/create', [Order_extra_ingredientController::class, 'create'])->name('order_extra_ingredients.create');
+Route::delete('/order_extra_ingredients/{order_extra_ingredient}', [Order_extra_ingredientController::class, 'destroy'])->name('order_extra_ingredients.destroy');
+Route::put('/order_extra_ingredients/{order_extra_ingredient}', [Order_extra_ingredientController::class, 'update'])->name('order_extra_ingredients.update');
+Route::get('/order_extra_ingredients/{order_extra_ingredient}/edit', [Order_extra_ingredientController::class, 'edit'])->name('order_extra_ingredients.edit');
+
 
 require __DIR__.'/auth.php';
