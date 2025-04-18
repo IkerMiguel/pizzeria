@@ -27,7 +27,9 @@ class Order_extra_ingredientController extends Controller
  */
 public function create()
 {
-    $orders = DB::table('orders')->orderBy('id')->get();
+    $orders = DB::table('orders')
+    ->orderBy('id'
+    )->get();
     $extra_ingredients = DB::table('extra_ingredients')->orderBy('name')->get();
 
     return view('order_extra_ingredient.new', [
