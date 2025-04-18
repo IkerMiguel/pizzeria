@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Branche;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BrancheController extends Controller
 {
@@ -11,7 +13,9 @@ class BrancheController extends Controller
      */
     public function index()
     {
-        //
+        $branches = DB::table('branches')->get();
+
+        return view('branche.index', ['branches' => $branches]);
     }
 
     /**
@@ -19,7 +23,7 @@ class BrancheController extends Controller
      */
     public function create()
     {
-        //
+        return view('branche.new');
     }
 
     /**
@@ -27,7 +31,16 @@ class BrancheController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('branches')->insert([
+            'name' => $request->name,
+            'address' => $request->address,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $branches = DB::table('branches')->get();
+
+        return view('branche.index', ['branches' => $branches]);
     }
 
     /**
