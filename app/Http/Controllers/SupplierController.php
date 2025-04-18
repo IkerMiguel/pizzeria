@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SupplierController extends Controller
 {
@@ -11,7 +13,10 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
+        $suppliers = DB::table('suppliers')
+        ->get();
+
+        return view('supplier.index', ['suppliers' => $suppliers]);
     }
 
     /**
@@ -19,7 +24,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('supplier.new');
     }
 
     /**
@@ -27,7 +32,18 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('suppliers')->insert([
+            'name' => $request->name,
+            'contact_info' => $request->contact_info,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $suppliers = DB::table('suppliers')
+        ->get();
+
+        return view('supplier.index', ['suppliers' => $suppliers]);
+        
     }
 
     /**

@@ -13,7 +13,8 @@ class BrancheController extends Controller
      */
     public function index()
     {
-        $branches = DB::table('branches')->get();
+        $branches = DB::table('branches')
+        ->get();
 
         return view('branche.index', ['branches' => $branches]);
     }
