@@ -89,6 +89,13 @@ class SupplierController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $supplier = Supplier::find($id);
+        $supplier->delete(); 
+
+        $suppliers = DB::table('suppliers')
+        ->get();
+
+        return view('supplier.index', ['suppliers' => $suppliers]);
+        
     }
 }
