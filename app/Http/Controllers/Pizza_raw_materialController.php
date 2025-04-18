@@ -117,6 +117,15 @@ class Pizza_raw_materialController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pizza_raw_material = Pizza_raw_material::find($id);
+        $pizza_raw_material->delete();
+
+        $pizza_raw_materials = DB::table('pizza_raw_material')
+        ->join('pizzas', 'pizza_raw_material.pizza_id', '=', 'pizzas.id')
+        ->join('raw_materials', 'pizza_raw_material.raw_material_id', '=', 'raw_materials.id')
+        ->select('pizza_raw_material.*','pizzas.name as pizza_name','raw_materials.name as raw_material_name')
+        ->get();
+
+        return view('pizza_raw_material.index', ['pizza_raw_materials' => $pizza_raw_materials]);
     }
 }
