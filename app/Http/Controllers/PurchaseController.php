@@ -73,7 +73,21 @@ class PurchaseController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $purchase = Purchase::find($id);
+
+        $suppliers = DB::table('suppliers')
+            ->orderBy('name')
+            ->get();
+    
+        $raw_materials = DB::table('raw_materials')
+            ->orderBy('name')
+            ->get();
+    
+        return view('purchase.edit', [
+            'purchase' => $purchase,
+            'suppliers' => $suppliers,
+            'raw_materials' => $raw_materials
+        ]);
     }
 
     /**
@@ -81,7 +95,23 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $purchase = Purchase::find($id);
+
+        $purchase->supplier_id = $request->supplier_id;
+        $purchase->raw_material_id = $request->raw_material_id;
+        $purchase->quantity = $request->quantity;
+        $purchase->purchase_price = $request->purchase_price;
+        $purchase->purchase_date = $request->purchase_date;
+        $purchase->updated_at = now();
+        $purchase->save();
+
+        $purchases = DB::table('purchases')
+        ->join('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
+        ->join('raw_materials', 'purchases.raw_material_id', '=', 'raw_materials.id')
+        ->select('purchases.*','suppliers.name as supplier_name','raw_materials.name as raw_material_name')
+        ->get();
+
+        return view('purchase.index', ['purchases' => $purchases]);
     }
 
     /**
