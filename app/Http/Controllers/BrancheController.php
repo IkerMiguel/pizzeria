@@ -54,17 +54,32 @@ class BrancheController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $branche = Branche::find($id); 
+
+        return view('branche.edit', [
+            'branche' => $branche
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+
+        $branche = Branche::find($id);
+
+        $branche->name = $request->name;
+        $branche->address = $request->address;
+        $branche->save();
+
+
+        $branches = DB::table('branches')
+        ->get();
+
+        return view('branche.index', ['branches' => $branches]);
     }
 
     /**
