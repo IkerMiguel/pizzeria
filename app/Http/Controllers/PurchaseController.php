@@ -119,6 +119,15 @@ class PurchaseController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $purchase = Purchase::find($id);
+        $purchase->delete();
+
+        $purchases = DB::table('purchases')
+        ->join('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
+        ->join('raw_materials', 'purchases.raw_material_id', '=', 'raw_materials.id')
+        ->select('purchases.*','suppliers.name as supplier_name','raw_materials.name as raw_material_name')
+        ->get();
+
+        return view('purchase.index', ['purchases' => $purchases]);
     }
 }
