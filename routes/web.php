@@ -40,5 +40,13 @@ Route::delete('/order_extra_ingredients/{order_extra_ingredient}', [Order_extra_
 Route::put('/order_extra_ingredients/{order_extra_ingredient}', [Order_extra_ingredientController::class, 'update'])->name('order_extra_ingredients.update');
 Route::get('/order_extra_ingredients/{order_extra_ingredient}/edit', [Order_extra_ingredientController::class, 'edit'])->name('order_extra_ingredients.edit');
 
+// branches
+
+Route::get('/branches', [BrancheController::class, 'index'])->name('branches.index');
+Route::post('/branches', [BrancheController::class, 'store'])->name('branches.store');
+Route::get('/branches/create', [BrancheController::class, 'create'])->name('branches.create');
+Route::delete('/branches/{branche}', [BrancheController::class, 'destroy'])->name('branches.destroy');
+Route::put('/branches/{branche}', [BrancheController::class, 'update'])->name('branches.update');
+Route::get('/branches/{branche}/edit', [BrancheController::class, 'edit'])->name('branches.edit');
 
 require __DIR__.'/auth.php';
