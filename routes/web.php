@@ -58,4 +58,14 @@ Route::delete('/suppliers/{supplier}', [SupplierController::class, 'destroy'])->
 Route::put('/suppliers/{supplier}', [SupplierController::class, 'update'])->name('suppliers.update');
 Route::get('/suppliers/{supplier}/edit', [SupplierController::class, 'edit'])->name('suppliers.edit');
 
+// raw_materials
+
+Route::get('/raw_materials', [Raw_materialController::class, 'index'])->name('raw_materials.index');
+Route::post('/raw_materials', [Raw_materialController::class, 'store'])->name('raw_materials.store');
+Route::get('/raw_materials/create', [Raw_materialController::class, 'create'])->name('raw_materials.create');
+Route::delete('/raw_materials/{raw_material}', [Raw_materialController::class, 'destroy'])->name('raw_materials.destroy');
+Route::put('/raw_materials/{raw_material}', [Raw_materialController::class, 'update'])->name('raw_materials.update');
+Route::get('/raw_materials/{raw_material}/edit', [Raw_materialController::class, 'edit'])->name('raw_materials.edit');
+
+
 require __DIR__.'/auth.php';
