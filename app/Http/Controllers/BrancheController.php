@@ -87,6 +87,12 @@ class BrancheController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $branche = Branche::find($id);
+        $branche->delete();
+        
+        $branches = DB::table('branches')
+        ->get();
+
+        return view('branche.index', ['branches' => $branches]);
     }
 }
