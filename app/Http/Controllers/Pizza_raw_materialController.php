@@ -73,7 +73,21 @@ class Pizza_raw_materialController extends Controller
      */
     public function edit(string $id)
     {
-        //
+            $pizza_raw_material = Pizza_raw_material::find($id);
+
+            $pizzas = DB::table('pizzas')
+                ->orderBy('name')
+                ->get();
+
+            $raw_materials = DB::table('raw_materials')
+                ->orderBy('name')
+                ->get();
+
+            return view('pizza_raw_material.edit', [
+                'pizza_raw_material' => $pizza_raw_material,
+                'pizzas' => $pizzas,
+                'raw_materials' => $raw_materials
+            ]);
     }
 
     /**
@@ -81,7 +95,21 @@ class Pizza_raw_materialController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $pizza_raw_material = Pizza_raw_material::find($id);
+
+        $pizza_raw_material->pizza_id = $request->pizza_id;
+        $pizza_raw_material->raw_material_id = $request->raw_material_id;
+        $pizza_raw_material->quantity = $request->quantity;
+        $pizza_raw_material->updated_at = now();
+        $pizza_raw_material->save();
+
+            $pizza_raw_materials = DB::table('pizza_raw_material')
+            ->join('pizzas', 'pizza_raw_material.pizza_id', '=', 'pizzas.id')
+            ->join('raw_materials', 'pizza_raw_material.raw_material_id', '=', 'raw_materials.id')
+            ->select('pizza_raw_material.*','pizzas.name as pizza_name','raw_materials.name as raw_material_name')
+            ->get();
+
+        return view('pizza_raw_material.index', ['pizza_raw_materials' => $pizza_raw_materials]);
     }
 
     /**
