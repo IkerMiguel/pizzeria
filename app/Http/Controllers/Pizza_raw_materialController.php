@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pizza_raw_material;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class Pizza_raw_materialController extends Controller
 {
@@ -11,7 +14,13 @@ class Pizza_raw_materialController extends Controller
      */
     public function index()
     {
-        //
+            $pizza_raw_materials = DB::table('pizza_raw_material')
+            ->join('pizzas', 'pizza_raw_material.pizza_id', '=', 'pizzas.id')
+            ->join('raw_materials', 'pizza_raw_material.raw_material_id', '=', 'raw_materials.id')
+            ->select('pizza_raw_material.*','pizzas.name as pizza_name','raw_materials.name as raw_material_name')
+            ->get();
+
+        return view('pizza_raw_material.index', ['pizza_raw_materials' => $pizza_raw_materials]);
     }
 
     /**
@@ -19,7 +28,13 @@ class Pizza_raw_materialController extends Controller
      */
     public function create()
     {
-        //
+            $pizzas = DB::table('pizzas')->orderBy('name')->get();
+            $raw_materials = DB::table('raw_materials')->orderBy('name')->get();
+
+            return view('pizza_raw_material.new', [
+                'pizzas' => $pizzas,
+                'raw_materials' => $raw_materials
+            ]);
     }
 
     /**
@@ -27,7 +42,22 @@ class Pizza_raw_materialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('pizza_raw_material')->insert([
+            'pizza_id' => $request->pizza_id,
+            'raw_material_id' => $request->raw_material_id,
+            'quantity' => $request->quantity,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $pizza_raw_materials = DB::table('pizza_raw_material')
+        ->join('pizzas', 'pizza_raw_material.pizza_id', '=', 'pizzas.id')
+        ->join('raw_materials', 'pizza_raw_material.raw_material_id', '=', 'raw_materials.id')
+        ->select('pizza_raw_material.*','pizzas.name as pizza_name','raw_materials.name as raw_material_name')
+        ->get();
+
+        return view('pizza_raw_material.index', ['pizza_raw_materials' => $pizza_raw_materials]);
+    
     }
 
     /**
