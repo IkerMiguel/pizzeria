@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Raw_material;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Raw_materialController extends Controller
 {
@@ -11,7 +13,10 @@ class Raw_materialController extends Controller
      */
     public function index()
     {
-        //
+        $raw_materials = DB::table('raw_materials')
+        ->get();
+
+        return view('raw_material.index', ['raw_materials' => $raw_materials]);
     }
 
     /**
@@ -19,7 +24,7 @@ class Raw_materialController extends Controller
      */
     public function create()
     {
-        //
+        return view('raw_material.new');
     }
 
     /**
@@ -27,7 +32,18 @@ class Raw_materialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('raw_materials')->insert([
+            'name' => $request->name,
+            'unit' => $request->unit,
+            'current_stock' => $request->current_stock,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $raw_materials = DB::table('raw_materials')
+        ->get();
+
+        return view('raw_material.index', ['raw_materials' => $raw_materials]);
     }
 
     /**
