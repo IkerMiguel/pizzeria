@@ -67,5 +67,15 @@ Route::delete('/raw_materials/{raw_material}', [Raw_materialController::class, '
 Route::put('/raw_materials/{raw_material}', [Raw_materialController::class, 'update'])->name('raw_materials.update');
 Route::get('/raw_materials/{raw_material}/edit', [Raw_materialController::class, 'edit'])->name('raw_materials.edit');
 
+// purchases
+
+Route::get('/purchases', [PurchaseController::class, 'index'])->name('purchases.index');
+Route::post('/purchases', [PurchaseController::class, 'store'])->name('purchases.store');
+Route::get('/purchases/create', [PurchaseController::class, 'create'])->name('purchases.create');
+Route::delete('/purchases/{purchase}', [PurchaseController::class, 'destroy'])->name('purchases.destroy');
+Route::put('/purchases/{purchase}', [PurchaseController::class, 'update'])->name('purchases.update');
+Route::get('/purchases/{purchase}/edit', [PurchaseController::class, 'edit'])->name('purchases.edit');
+
+
 
 require __DIR__.'/auth.php';

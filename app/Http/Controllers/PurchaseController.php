@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Purchase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
@@ -11,7 +13,13 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        //
+        $purchases = DB::table('purchases')
+        ->join('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
+        ->join('raw_materials', 'purchases.raw_material_id', '=', 'raw_materials.id')
+        ->select('purchases.*','suppliers.name as supplier_name','raw_materials.name as raw_material_name')
+        ->get();
+
+        return view('purchase.index', ['purchases' => $purchases]);
     }
 
     /**
@@ -19,7 +27,13 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        //
+        $suppliers = DB::table('suppliers')->orderBy('name')->get();
+        $raw_materials = DB::table('raw_materials')->orderBy('name')->get();
+    
+        return view('purchase.new', [
+            'suppliers' => $suppliers,
+            'raw_materials' => $raw_materials
+        ]);
     }
 
     /**
@@ -27,7 +41,23 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('purchases')->insert([
+            'supplier_id' => $request->supplier_id,
+            'raw_material_id' => $request->raw_material_id,
+            'quantity' => $request->quantity,
+            'purchase_price' => $request->purchase_price,
+            'purchase_date' => $request->purchase_date,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+    
+        $purchases = DB::table('purchases')
+        ->join('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
+        ->join('raw_materials', 'purchases.raw_material_id', '=', 'raw_materials.id')
+        ->select('purchases.*','suppliers.name as supplier_name','raw_materials.name as raw_material_name')
+        ->get();
+
+        return view('purchase.index', ['purchases' => $purchases]);
     }
 
     /**
