@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\BrancheController;
 use App\Http\Controllers\Order_extra_ingredientController;
 use App\Http\Controllers\Pizza_raw_materialController;
@@ -30,6 +31,8 @@ Route::middleware('auth')->group(function () {
     });
 
 */
+
+Route::get('/ingredients', [IngredientController::class, 'index'])->name('ingredients.index');
 
 //order_extra_ingredient
 
