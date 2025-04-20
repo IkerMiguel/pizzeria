@@ -26,6 +26,8 @@
                     <td>{{ $ingredient->id}}</td>
                     <td>{{ $ingredient->name}}</td>
                     <td>
+                        <a href="{{route('ingredients.edit', ['ingredient' => $ingredient->id])}}"
+                            class="btn btn-info">Edit</a></li>
                         <form action="{{route('ingredients.destroy',['ingredient' =>$ingredient->id])}}"
                             method="POST" style="display:inline-block">
                             @method('delete')
