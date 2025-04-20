@@ -109,6 +109,9 @@ Route::get('/pizza_raw_materials/{pizza_raw_material}/edit', [Pizza_raw_material
 Route::get('/pizzas', [PizzasController::class, 'index'])->name('pizzas.index');
 Route::post('/pizzas', [PizzasController::class, 'store'])->name('pizzas.store');
 Route::get('/pizzas/create', [PizzasController::class, 'create'])->name('pizzas.create');
+Route::delete('/pizzas/{pizza}', [PizzasController::class, 'destroy'])->name('pizzas.destroy');
+Route::put('/pizzas/{pizza}', [PizzasController::class, 'update'])->name('pizzas.update');
+Route::get('/pizzas/{pizza}/edit', [PizzasController::class, 'edit'])->name('pizzas.edit');
 
 
 require __DIR__.'/auth.php';

@@ -56,7 +56,9 @@ class PizzasController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pizza = Pizza::find($id);
+        
+        return view('pizzas.edit', ['pizza' => $pizza]);
     }
 
     /**
@@ -64,7 +66,15 @@ class PizzasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $pizza = Pizza::find($id);
+        
+        $pizza->name = $request->name;
+        $pizza->save(); 
+        $pizzas = DB::table('pizzas')
+        ->get();
+        $pizzas = Pizza::all();
+        
+        return view('pizzas.index', ['pizzas' => $pizzas]);
     }
 
     /**
@@ -75,3 +85,4 @@ class PizzasController extends Controller
         //
     }
 }
+
