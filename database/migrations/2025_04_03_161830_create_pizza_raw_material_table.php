@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pizza_raw_material', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pizza_id')->constrained('pizzas')->onDelete('cascade');
+            $table->foreignId('raw_material_id')->constrained('raw_materials')->onDelete('cascade');
             $table->decimal('quantity', total:8,places:2);
             $table->timestamps();
         });
