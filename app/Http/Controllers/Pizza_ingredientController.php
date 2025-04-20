@@ -79,6 +79,9 @@ class Pizza_ingredientController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pizza_ingredient = Pizza_ingredient::find($id);
+        $pizza_ingredient->delete();
+
+        return redirect()->route('pizza_ingredients.index');
     }
 }
