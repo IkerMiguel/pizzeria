@@ -63,7 +63,20 @@ class Pizza_ingredientController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pizza_ingredient = Pizza_ingredient::find($id);
+        $pizzas = DB::table('pizzas')
+            ->orderBy('name')
+            ->get();
+
+        $ingredients = DB::table('ingredients')
+            ->orderBy('name')
+            ->get();
+
+        return view('pizza_ingredient.edit', [
+            'pizza_ingredient' => $pizza_ingredient,
+            'pizzas' => $pizzas,
+            'ingredients' => $ingredients
+        ]);
     }
 
     /**
@@ -71,7 +84,13 @@ class Pizza_ingredientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $pizza_ingredient = Pizza_ingredient::find($id);
+
+        $pizza_ingredient->pizza_id = $request->pizza;
+        $pizza_ingredient->ingredient_id = $request->ingredient;
+        $pizza_ingredient->save();
+
+        return redirect()->route('pizza_ingredients.index');
     }
 
     /**
