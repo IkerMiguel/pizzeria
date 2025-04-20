@@ -12,8 +12,7 @@
     <div class="container">
         <h1 class="mt-5">Ingredients list</h1>
 
-        <!-- Boton crear-->
-        <a href="" class="btn btn-success mt-3 mb-3">Add</a>
+        <a href="{{route('ingredients.create')}}" class="btn btn-success mt-3 mb-3">Add</a>
         <table class="table">
             <thead>
                 <tr>
