@@ -30,6 +30,8 @@
                     <td>{{ $pizza_ingredient->pizza_name }}</td>
                     <td>{{ $pizza_ingredient->ingredient_name }}</td>
                     <td>
+                        <a href="{{route('pizza_ingredients.edit', ['pizza_ingredient' => $pizza_ingredient->id])}}"
+                            class="btn btn-info">Edit</a></li>
                         <form action="{{route('pizza_ingredients.destroy',['pizza_ingredient' =>$pizza_ingredient->id])}}"
                             method="POST" style="display:inline-block">
                             @method('delete')
