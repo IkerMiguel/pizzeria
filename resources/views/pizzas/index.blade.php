@@ -29,8 +29,11 @@
                     <td>{{ $pizza->id }}</td>
                     <td>{{ $pizza->name }}</td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-primary">Editar</a>
-                        <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+                    <a href="{{ route('pizzas.edit', ['pizza' => $pizza->id]) }}" class="btn btn-info btn-sm">Editar</a>
+                <form action="{{ route('pizzas.destroy', ['pizza' => $pizza->id]) }}" method="POST" style="display:inline-block">
+                  @method('delete')
+                  @csrf
+                  <input class="btn btn-danger btn-sm" type="submit" value="Eliminar">
                     </td>
                 </tr>
                 @endforeach
