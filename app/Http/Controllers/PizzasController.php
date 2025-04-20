@@ -82,7 +82,14 @@ class PizzasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pizza = Pizza::find($id);
+        $pizza->delete();
+        
+        $pizzas = DB::table('pizzas')
+        ->get();
+        $pizzas = Pizza::all();
+        
+        return view('pizzas.index', ['pizzas' => $pizzas]);
     }
 }
 
