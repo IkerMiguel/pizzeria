@@ -71,6 +71,9 @@ class IngredientController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $ingredient = Ingredient::find($id);
+        $ingredient->delete();
+
+        return redirect()->route('ingredients.index');
     }
 }
