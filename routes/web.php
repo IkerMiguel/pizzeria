@@ -8,6 +8,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\Raw_materialController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PizzasController; 
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -88,7 +89,11 @@ Route::delete('/pizza_raw_materials/{pizza_raw_material}', [Pizza_raw_materialCo
 Route::put('/pizza_raw_materials/{pizza_raw_material}', [Pizza_raw_materialController::class, 'update'])->name('pizza_raw_materials.update');
 Route::get('/pizza_raw_materials/{pizza_raw_material}/edit', [Pizza_raw_materialController::class, 'edit'])->name('pizza_raw_materials.edit');
 
+// pizzas
 
+Route::get('/pizzas', [PizzasController::class, 'index'])->name('pizzas.index');
+Route::post('/pizzas', [PizzasController::class, 'store'])->name('pizzas.store');
+Route::get('/pizzas/create', [PizzasController::class, 'create'])->name('pizzas.create');
 
 
 require __DIR__.'/auth.php';
