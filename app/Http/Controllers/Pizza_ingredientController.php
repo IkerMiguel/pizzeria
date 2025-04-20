@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pizza_ingredient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,7 +27,13 @@ class Pizza_ingredientController extends Controller
      */
     public function create()
     {
-        //
+        $pizza_ingredients = DB::table('pizza_ingredient')
+            ->join('pizzas','pizza_ingredient.pizza_id', '=', 'pizzas.id')
+            ->join('ingredients', 'pizza_ingredient.ingredient_id', '=', 'ingredients.id')
+            ->select('pizza_ingredient.*', 'pizzas.name as pizza_name', 'ingredients.name as ingredient_name')
+            ->orderBy('pizza_ingredient.pizza_id')
+            ->get();
+        return view('pizza_ingredient.new', ['pizza_ingredients' => $pizza_ingredients]);
     }
 
     /**
@@ -34,7 +41,13 @@ class Pizza_ingredientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pizza_ingredient = new Pizza_ingredient();
+
+        $pizza_ingredient->pizza_id = $request->pizza;
+        $pizza_ingredient->ingredient_id = $request->ingredient;
+        $pizza_ingredient->save();
+
+        return redirect()->route('pizza_ingredients.index');
     }
 
     /**
