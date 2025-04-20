@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
 */
 
 Route::get('/ingredients', [IngredientController::class, 'index'])->name('ingredients.index');
+Route::post('/ingredients', [IngredientController::class, 'store'])->name('ingredients.store');
+Route::get('/ingredients/create', [IngredientController::class, 'create'])->name('ingredients.create');
 
 //order_extra_ingredient
 

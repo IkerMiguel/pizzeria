@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ingredient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,7 +23,9 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        //
+        $ingredients = DB::table('ingredients')
+            ->get();
+        return view('Ingredient.new', ['ingredients' => $ingredients]);
     }
 
     /**
@@ -30,7 +33,13 @@ class IngredientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ingredient = new Ingredient();
+        $ingredient->name = $request->name;
+        $ingredient->save();
+
+        $ingredients = DB::table('ingredients')
+            ->get();
+        return view('Ingredient.index', ['ingredients' => $ingredients]);
     }
 
     /**
