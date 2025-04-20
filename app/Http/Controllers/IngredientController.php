@@ -55,7 +55,8 @@ class IngredientController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $ingredient = Ingredient::find($id);
+        return view('Ingredient.edit', ['ingredient' => $ingredient]);
     }
 
     /**
@@ -63,7 +64,13 @@ class IngredientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $ingredient = Ingredient::find($id);
+        $ingredient->name = $request->name;
+        $ingredient->save();
+
+        $ingredients = DB::table('ingredients')
+            ->get();
+        return view('Ingredient.index', ['ingredients' => $ingredients]);
     }
 
     /**
