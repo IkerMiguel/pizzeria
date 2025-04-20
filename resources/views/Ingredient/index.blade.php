@@ -26,7 +26,12 @@
                     <td>{{ $ingredient->id}}</td>
                     <td>{{ $ingredient->name}}</td>
                     <td>
-                        Actions
+                        <form action="{{route('ingredients.destroy',['ingredient' =>$ingredient->id])}}"
+                            method="POST" style="display:inline-block">
+                            @method('delete')
+                            @csrf
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </form>
                     </td>
                 </tr>
                 @endforeach
