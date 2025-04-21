@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -37,7 +38,25 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $orders = DB::table('orders')->get();
+        $clients = DB::table('clients')
+            ->join('users', 'clients.user_id', '=', 'users.id')
+            ->select('clients.id as client_id', 'users.name as client_name')
+            ->get();
+
+        $branches = DB::table('branches')->select('id', 'name')->get();
+
+        $employees = DB::table('employees')
+            ->join('users', 'employees.user_id', '=', 'users.id')
+            ->select('employees.id', 'users.name as employee_name')
+            ->get();
+
+        return view('Order.new', [
+            'orders' => $orders,
+            'clients' => $clients,
+            'branches' => $branches,
+            'employees' => $employees
+        ]);
     }
 
     /**
@@ -45,7 +64,16 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order = new Order();
+        $order->client_id = $request->client_name;
+        $order->branch_id = $request->branch;
+        $order->total_price = $request->price;
+        $order->status = $request->status;
+        $order->delivery_type = $request->deliveryType;
+        $order->delivery_person_id = $request->employee;
+        $order->save();
+
+        return redirect()->route('orders.index');
     }
 
     /**
