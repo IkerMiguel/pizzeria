@@ -38,7 +38,12 @@
                         <td>{{ $order->delivery_type }}</td>
                         <td>{{ $order->employees_name ?? 'N/A' }}</td>
                         <td>
-                            Actions
+                            <form action="{{route('orders.destroy',['order' =>$order->id])}}"
+                                method="POST" style="display:inline-block">
+                                @method('delete')
+                                @csrf
+                                <input type="submit" class="btn btn-danger" value="Delete">
+                            </form>
                         </td>
                     </tr>
                 @endforeach
