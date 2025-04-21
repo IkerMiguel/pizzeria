@@ -57,6 +57,7 @@ Route::get('/pizza_ingredients/{pizza_ingredient}/edit', [Pizza_ingredientContro
 Route::get('/extra_ingredients', [Extra_ingredientController::class, 'index'])->name('extra_ingredients.index');
 Route::post('/extra_ingredients', [Extra_ingredientController::class, 'store'])->name('extra_ingredients.store');
 Route::get('/extra_ingredients/create', [Extra_ingredientController::class, 'create'])->name('extra_ingredients.create');
+Route::delete('/extra_ingredients/{extra_ingredient}', [Extra_ingredientController::class, 'destroy'])->name('extra_ingredients.destroy');
 
 //order_extra_ingredient
 
