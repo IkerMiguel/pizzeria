@@ -4,12 +4,14 @@ use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\BrancheController;
 use App\Http\Controllers\Extra_ingredientController;
 use App\Http\Controllers\Order_extra_ingredientController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Pizza_ingredientController;
 use App\Http\Controllers\Pizza_raw_materialController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\Raw_materialController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -60,6 +62,10 @@ Route::get('/extra_ingredients/create', [Extra_ingredientController::class, 'cre
 Route::delete('/extra_ingredients/{extra_ingredient}', [Extra_ingredientController::class, 'destroy'])->name('extra_ingredients.destroy');
 Route::put('/extra_ingredients/{extra_ingredient}', [Extra_ingredientController::class, 'update'])->name('extra_ingredients.update');
 Route::get('/extra_ingredients/{extra_ingredient}/edit', [Extra_ingredientController::class, 'edit'])->name('extra_ingredients.edit');
+
+//Order
+
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 
 //order_extra_ingredient
 
