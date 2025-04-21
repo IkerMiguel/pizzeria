@@ -30,7 +30,12 @@
                     <td>{{ $extra_ingredient->name }}</td>
                     <td>{{ '$' . number_format($extra_ingredient->price, 2, '.', ',') }}</td>
                     <td>
-                        Actions
+                        <form action="{{route('extra_ingredients.destroy',['extra_ingredient' =>$extra_ingredient->id])}}"
+                            method="POST" style="display:inline-block">
+                            @method('delete')
+                            @csrf
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </form>
                     </td>
                 </tr>
                 @endforeach
