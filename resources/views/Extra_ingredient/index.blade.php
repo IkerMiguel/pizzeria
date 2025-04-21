@@ -12,8 +12,7 @@
     <div class="container">
         <h1 class="mt-5">Extra Ingredients List</h1>
 
-        <!-- Boton crear -->
-        <a href="" class="btn btn-success mt-3 mb-3">Add</a>
+        <a href="{{route('extra_ingredients.create')}}" class="btn btn-success mt-3 mb-3">Add</a>
 
         <table class="table table-bordered">
             <thead>
@@ -29,7 +28,7 @@
                 <tr>
                     <td>{{ $extra_ingredient->id }}</td>
                     <td>{{ $extra_ingredient->name }}</td>
-                    <td>{{ $extra_ingredient->price }}</td>
+                    <td>{{ '$' . number_format($extra_ingredient->price, 2, '.', ',') }}</td>
                     <td>
                         Actions
                     </td>

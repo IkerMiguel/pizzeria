@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Extra_ingredient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,7 +23,9 @@ class Extra_ingredientController extends Controller
      */
     public function create()
     {
-        //
+        $extra_ingredients = DB::table('extra_ingredients')
+            ->get();
+        return view('Extra_ingredient.new', ['extra_ingredients' => $extra_ingredients]);
     }
 
     /**
@@ -30,7 +33,13 @@ class Extra_ingredientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $extra_ingredient = new Extra_ingredient();
+        $extra_ingredient->name = $request->ingredient;
+        $extra_ingredient->price = $request->price;
+
+        $extra_ingredient->save();
+
+        return redirect()->route('extra_ingredients.index');
     }
 
     /**
