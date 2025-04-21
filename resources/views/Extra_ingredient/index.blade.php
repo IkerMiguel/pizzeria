@@ -30,6 +30,8 @@
                     <td>{{ $extra_ingredient->name }}</td>
                     <td>{{ '$' . number_format($extra_ingredient->price, 2, '.', ',') }}</td>
                     <td>
+                        <a href="{{route('extra_ingredients.edit', ['extra_ingredient' => $extra_ingredient->id])}}"
+                            class="btn btn-info">Edit</a></li>
                         <form action="{{route('extra_ingredients.destroy',['extra_ingredient' =>$extra_ingredient->id])}}"
                             method="POST" style="display:inline-block">
                             @method('delete')
