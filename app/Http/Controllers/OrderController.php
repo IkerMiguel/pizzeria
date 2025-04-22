@@ -89,7 +89,28 @@ class OrderController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $order = Order::find($id);
+
+        $clients = DB::table('clients')
+            ->join('users', 'clients.user_id', '=', 'users.id')
+            ->select('clients.id as client_id', 'users.name as client_name')
+            ->get();
+
+        $branches = DB::table('branches')
+            ->select('id', 'name')
+            ->get();
+
+        $employees = DB::table('employees')
+            ->join('users', 'employees.user_id', '=', 'users.id')
+            ->select('employees.id', 'users.name as employee_name')
+            ->get();
+
+        return view('Order.edit', [
+            'order' => $order,
+            'clients' => $clients,
+            'branches' => $branches,
+            'employees' => $employees,
+        ]);
     }
 
     /**
@@ -97,7 +118,16 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $order = Order::find($id);
+        $order->client_id = $request->client_name;
+        $order->branch_id = $request->branch;
+        $order->total_price = $request->price;
+        $order->status = $request->status;
+        $order->delivery_type = $request->deliveryType;
+        $order->delivery_person_id = $request->employee;
+        $order->save();
+
+        return redirect()->route('orders.index');
     }
 
     /**

@@ -38,6 +38,8 @@
                         <td>{{ $order->delivery_type }}</td>
                         <td>{{ $order->employees_name ?? 'N/A' }}</td>
                         <td>
+                            <a href="{{route('orders.edit', ['order' => $order->id])}}"
+                                class="btn btn-info">Edit</a></li>
                             <form action="{{route('orders.destroy',['order' =>$order->id])}}"
                                 method="POST" style="display:inline-block">
                                 @method('delete')
