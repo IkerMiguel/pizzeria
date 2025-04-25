@@ -68,7 +68,13 @@ class ClientController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $client = Client::find($id);
+        $users = DB::table('users')->orderBy('name')->get();
+    
+        return view('client.edit', [
+            'client' => $client,
+            'users' => $users
+        ]);
     }
 
     /**
@@ -76,7 +82,21 @@ class ClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       
+
+        $client = Client::find($id);
+        $client->user_id = $request->user_id;
+        $client->address = $request->address;
+        $client->phone = $request->phone;
+        $client->updated_at = now();
+        $client->save();
+
+        $clients = DB::table('clients')
+            ->join('users', 'clients.user_id', '=', 'users.id')
+            ->select('clients.*', 'users.name as user_name')
+            ->get();
+
+        return view('client.index', ['clients' => $clients]);
     }
 
     /**
