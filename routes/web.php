@@ -11,14 +11,9 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\Raw_materialController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProfileController;
-<<<<<<< Updated upstream
-use App\Http\Controllers\PizzasController;
-use App\Http\Controllers\Pizzas_sizeController;
-=======
 use App\Http\Controllers\PizzasController; 
 use App\Http\Controllers\Pizzas_sizeController; 
 use App\Http\Controllers\ClientController;
->>>>>>> Stashed changes
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
