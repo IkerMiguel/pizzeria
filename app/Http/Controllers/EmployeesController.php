@@ -69,7 +69,13 @@ class EmployeesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $employee = Employee::find($id);
+        $users = DB::table('users')->orderBy('name')->get();
+    
+        return view('employees.edit', [
+            'employee' => $employee,
+            'users' => $users
+        ]);
     }
 
     /**
@@ -77,7 +83,15 @@ class EmployeesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $employee = Employee::find($id);
+        $employee->user_id = $request->user_id;
+        $employee->position = $request->position;
+        $employee->identification_number = $request->identification_number;
+        $employee->salary = $request->salary;
+        $employee->hire_date = $request->hire_date;
+        $employee->save();
+
+        return redirect()->route('employees.index');
     }
 
     /**
