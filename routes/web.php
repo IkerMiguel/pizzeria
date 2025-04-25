@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PizzasController; 
 use App\Http\Controllers\Pizzas_sizeController; 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\EmployeesController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -153,6 +154,14 @@ Route::get('/clients/create', [ClientController::class, 'create'])->name('client
 Route::delete('/clients/{client}', [ClientController::class, 'destroy'])->name('clients.destroy');
 Route::put('/clients/{client}', [ClientController::class, 'update'])->name('clients.update');
 Route::get('/clients/{client}/edit', [ClientController::class, 'edit'])->name('clients.edit');
+
+// employees
+Route::get('/employees', [EmployeesController::class, 'index'])->name('employees.index');
+Route::post('/employees', [EmployeesController::class, 'store'])->name('employees.store');
+Route::get('/employees/create', [EmployeesController::class, 'create'])->name('employees.create');
+Route::delete('/employees/{employee}', [EmployeesController::class, 'destroy'])->name('employees.destroy');
+Route::put('/employees/{employee}', [EmployeesController::class, 'update'])->name('employees.update');  
+Route::get('/employees/{employee}/edit', [EmployeesController::class, 'edit'])->name('employees.edit');
 
 
 require __DIR__.'/auth.php';
