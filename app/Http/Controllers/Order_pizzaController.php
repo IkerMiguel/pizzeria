@@ -68,7 +68,18 @@ class Order_pizzaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $order_pizza = Order_pizza::find($id);
+
+        $order = DB::table('orders')->where('id', $order_pizza->order_id)->first();
+
+
+        $pizza_sizes = DB::table('pizza_size')->get();
+
+        return view('Order_pizza.edit', [
+            'order_pizza' => $order_pizza,
+            'orders' => $order,
+            'pizza_sizes' => $pizza_sizes
+        ]);
     }
 
     /**
@@ -76,7 +87,14 @@ class Order_pizzaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $order_pizza = Order_pizza::find($id);
+
+        $order_pizza->order_id = $request->order_id;
+        $order_pizza->pizza_size_id = $request->pizza_size_id;
+        $order_pizza->quantity = $request->quantity;
+        $order_pizza->save();
+
+        return redirect()->route('orders_pizza.index');
     }
 
     /**
