@@ -34,7 +34,12 @@
                     <td>{{ $order_pizza->pizza_name }}</td>
                     <td>{{ $order_pizza->quantity }}</td>
                     <td>
-                        Actions
+                        <form action="{{route('orders_pizza.destroy',['order_pizza' =>$order_pizza->id])}}"
+                            method="POST" style="display:inline-block">
+                            @method('delete')
+                            @csrf
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </form>
                     </td>
                 </tr>
                 @endforeach
