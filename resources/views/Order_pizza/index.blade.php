@@ -12,7 +12,7 @@
     <div class="container">
         <h1 class="mt-5">Orders Pizza List</h1>
         <!-- Boton crear-->
-        <a href="" class="btn btn-success mt-3 mb-3">Add</a>
+        <a href="{{route('orders_pizza.create')}}" class="btn btn-success mt-3 mb-3">Add</a>
 
         <table class="table table-bordered">
             <thead>
@@ -20,6 +20,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Order Status</th>
                     <th scope="col">Pizza Size</th>
+                    <th scope="col">Pizza</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -30,6 +31,7 @@
                     <td>{{ $order_pizza->id }}</td>
                     <td>{{ $order_pizza->order_status }}</td>
                     <td>{{ $order_pizza->pizza_size }}</td>
+                    <td>{{ $order_pizza->pizza_name }}</td>
                     <td>{{ $order_pizza->quantity }}</td>
                     <td>
                         Actions
