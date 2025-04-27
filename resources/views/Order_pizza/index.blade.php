@@ -34,6 +34,8 @@
                     <td>{{ $order_pizza->pizza_name }}</td>
                     <td>{{ $order_pizza->quantity }}</td>
                     <td>
+                        <a href="{{route('orders_pizza.edit', ['order_pizza' => $order_pizza->id])}}"
+                            class="btn btn-info">Edit</a></li>
                         <form action="{{route('orders_pizza.destroy',['order_pizza' =>$order_pizza->id])}}"
                             method="POST" style="display:inline-block">
                             @method('delete')
