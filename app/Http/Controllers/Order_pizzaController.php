@@ -84,6 +84,8 @@ class Order_pizzaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $order_pizza = Order_pizza::find($id);
+        $order_pizza->delete();
+        return redirect()->route('orders_pizza.index');
     }
 }
