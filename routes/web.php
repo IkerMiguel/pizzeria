@@ -16,6 +16,7 @@ use App\Http\Controllers\PizzasController;
 use App\Http\Controllers\Pizzas_sizeController; 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -172,6 +173,14 @@ Route::get('/employees/create', [EmployeesController::class, 'create'])->name('e
 Route::delete('/employees/{employee}', [EmployeesController::class, 'destroy'])->name('employees.destroy');
 Route::put('/employees/{employee}', [EmployeesController::class, 'update'])->name('employees.update');  
 Route::get('/employees/{employee}/edit', [EmployeesController::class, 'edit'])->name('employees.edit');
+
+//User
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 
 
 require __DIR__.'/auth.php';
