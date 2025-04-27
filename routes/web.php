@@ -77,6 +77,8 @@ Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])->name('orde
 //order pizza
 
 Route::get('/orders_pizza', [Order_pizzaController::class, 'index'])->name('orders_pizza.index');
+Route::post('/orders_pizza', [Order_pizzaController::class, 'store'])->name('orders_pizza.store');
+Route::get('/orders_pizza/create', [Order_pizzaController::class, 'create'])->name('orders_pizza.create');
 
 //order_extra_ingredient
 
