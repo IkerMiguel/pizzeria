@@ -82,6 +82,8 @@ Route::get('/orders_pizza', [Order_pizzaController::class, 'index'])->name('orde
 Route::post('/orders_pizza', [Order_pizzaController::class, 'store'])->name('orders_pizza.store');
 Route::get('/orders_pizza/create', [Order_pizzaController::class, 'create'])->name('orders_pizza.create');
 Route::delete('/orders_pizza/{order_pizza}', [Order_pizzaController::class, 'destroy'])->name('orders_pizza.destroy');
+Route::put('/orders_pizza/{order_pizza}', [Order_pizzaController::class, 'update'])->name('orders_pizza.update');
+Route::get('/orders_pizza/{order_pizza}/edit', [Order_pizzaController::class, 'edit'])->name('orders_pizza.edit');
 
 //order_extra_ingredient
 
