@@ -4,6 +4,7 @@ use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\BrancheController;
 use App\Http\Controllers\Extra_ingredientController;
 use App\Http\Controllers\Order_extra_ingredientController;
+use App\Http\Controllers\Order_pizzaController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Pizza_ingredientController;
 use App\Http\Controllers\Pizza_raw_materialController;
@@ -72,6 +73,10 @@ Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.c
 Route::delete('/orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
 Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.update');
 Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])->name('orders.edit');
+
+//order pizza
+
+Route::get('/orders_pizza', [Order_pizzaController::class, 'index'])->name('orders_pizza.index');
 
 //order_extra_ingredient
 
