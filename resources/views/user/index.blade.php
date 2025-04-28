@@ -48,7 +48,7 @@
             <th>Nombre</th>
             <th>Email</th>
             <th>Rol</th>
-            @if($employee && $employee->position == 'administrador')
+            @if($isAdmin)
               <th>Acciones</th>
             @endif
           </tr>
