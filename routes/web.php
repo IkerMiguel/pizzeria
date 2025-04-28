@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
     });
 
 */
-
+Route::middleware('auth')->group(function () {
 //Ingredient
 
 Route::get('/ingredients', [IngredientController::class, 'index'])->name('ingredients.index');
@@ -182,5 +182,6 @@ Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.
 Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 
+});
 
 require __DIR__.'/auth.php';
