@@ -43,11 +43,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/ingredients', [IngredientController::class, 'store'])
         ->middleware(CheckRole::class . ':administrador')->name('ingredients.store');
 
+
+*/
+Route::middleware('auth')->group(function () {
+//Ingredient
+
     Route::get('/ingredients/create', [IngredientController::class, 'create'])
         ->middleware(CheckRole::class . ':administrador')->name('ingredients.create');
 
     Route::delete('/ingredients/{ingredient}', [IngredientController::class, 'destroy'])
         ->middleware(CheckRole::class . ':administrador')->name('ingredients.destroy');
+
 
     Route::put('/ingredients/{ingredient}', [IngredientController::class, 'update'])
         ->middleware(CheckRole::class . ':administrador')->name('ingredients.update');
@@ -376,6 +382,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/create', [UserController::class, 'create'])
         ->middleware(CheckRole::class . ':administrador,cliente')->name('users.create');
 
+
     Route::delete('/users/{user}', [UserController::class, 'destroy'])
         ->middleware(CheckRole::class . ':administrador')->name('users.destroy');
 
@@ -384,6 +391,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/users/{user}/edit', [UserController::class, 'edit'])
         ->middleware(CheckRole::class . ':administrador,cliente,empleado')->name('users.edit');
+
 });
 
 require __DIR__.'/auth.php';

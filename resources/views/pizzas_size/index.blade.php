@@ -1,3 +1,10 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('pizzas_size') }}
+        </h2>
+    </x-slot>
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -9,9 +16,18 @@
   </head>
    <body>
     <div class="container">
-        <h1 class="mt-4">Pizzas y sus Tamaños</h1>
+      <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900">
 
+        @php
+          $employee = \App\Models\Employee::where('user_id', Auth::id())->first();
+      @endphp
+
+      @if($employee && $employee->position == 'administrador')
         <a href="{{ route('pizzas_sizes.create') }}" class="btn btn-success mb-3">Agregar Tamaño</a>
+      @endif
 
         <table class="table table-striped">
             <thead>
@@ -30,6 +46,7 @@
                     <td>{{ $pizzas_size->pizza_id }}</td>
                     <td>{{ ucfirst($pizzas_size->size) }}</td>
                     <td>${{ number_format($pizzas_size->price, 2) }}</td>
+                    @if($employee && $employee->position == 'administrador')
                     <td>
                       <a href="{{ route('pizzas_sizes.edit', ['pizzas_size' => $pizzas_size->id]) }}" class="btn btn-info btn-sm">Editar</a>
                       <form action="{{ route('pizzas_sizes.destroy', ['pizzas_size' => $pizzas_size->id]) }}" method="POST" style="display:inline-block">
@@ -38,10 +55,15 @@
                           <input type="submit" class="btn btn-danger btn-sm" value="Eliminar">
                       </form>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -51,3 +73,4 @@
 
   </body>
 </html>
+</x-app-layout>
