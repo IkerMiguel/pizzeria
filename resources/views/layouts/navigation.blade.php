@@ -16,6 +16,77 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                <!-- Cliente -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    @if (Auth::user()->role === 'cliente')
+                        <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
+                            {{ __('My Orders') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('pizzas.index')" :active="request()->routeIs('pizzas.*')">
+                            {{ __('Menu') }}
+                        </x-nav-link>
+                    @endif
+                </div>
+
+                <!-- Empleado -->
+                @if (Auth::user()->role === 'empleado' && Auth::user()->employee->position === 'cajero')
+                    <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
+                        {{ __('Manage Orders') }}
+                    </x-nav-link>
+                @endif
+
+                <!-- Administrador -->
+                @if (Auth::user()->role === 'empleado' && Auth::user()->employee->position === 'administrador')
+                    <x-nav-link :href="route('pizzas.index')" :active="request()->routeIs('pizzas.*')">
+                        {{ __('Manage Pizzas') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('ingredients.index')" :active="request()->routeIs('ingredients.*')">
+                        {{ __('Manage Ingredients') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('branches.index')" :active="request()->routeIs('branches.*')">
+                        {{ __('Branches') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('employees.index')" :active="request()->routeIs('employees.*')">
+                        {{ __('Manage Employees') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                        {{ __('Manage Users') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('raw_materials.index')" :active="request()->routeIs('raw_materials.*')">
+                        {{ __('Raw Materials') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('suppliers.index')" :active="request()->routeIs('suppliers.*')">
+                        {{ __('Suppliers') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('purchases.index')" :active="request()->routeIs('purchases.*')">
+                        {{ __('Purchases') }}
+                    </x-nav-link>
+                @endif
+
+                <!-- Cocinero -->
+
+                @if (Auth::user()->role === 'empleado' && Auth::user()->employee->position === 'cocinero')
+                    <x-nav-link :href="route('orders.edit')" :active="request()->routeIs('orders.index')">
+                        {{ __('Orders to Prepare') }}
+                    </x-nav-link>
+                @endif
+
+                <!-- Mensajero -->
+                @if (Auth::user()->role === 'empleado' && Auth::user()->employee->position === 'mensajero')
+                    <x-nav-link :href="route('orders.delivery')" :active="request()->routeIs('orders.delivery')">
+                        {{ __('Deliveries') }}
+                    </x-nav-link>
+                @endif
+
             </div>
 
             <!-- Settings Dropdown -->
